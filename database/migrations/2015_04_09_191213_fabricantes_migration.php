@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAvionsTable extends Migration {
+class FabricantesMigration extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,13 @@ class CreateAvionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('avions', function(Blueprint $table)
+		Schema::create('fabricantes', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('nombre');
+			$table->string('direccion');
+			$table->string('telefono');
+			//Automaticamente añadira created_at y update_at al activar la opcion timestamps()
 			$table->timestamps();
 		});
 	}
@@ -26,7 +30,7 @@ class CreateAvionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('avions');
+		Schema::drop('fabricantes');
 	}
 
 }
