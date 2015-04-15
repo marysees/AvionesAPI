@@ -28,8 +28,7 @@ class FabricanteSeeder extends Seeder {
 						'direccion'=>$faker->word(),
 						'telefono'=>$faker->randomNumber()
 						]
-					
-					);
+			);
 		}
 	}
 

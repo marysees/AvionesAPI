@@ -25,7 +25,7 @@ class AvionesMigration extends Migration {
 			//Automaticamente añadira created_at y update_at al activar la opcion timestamps()
 			$table->timestamps();
 			//por ultimo definimos la clave foranea
-			$table->foreign('fabricante_id')->references('id')->on ('fabricantes');
+			$table->foreign('fabricante_id')->references('id')->on('fabricantes');
 			
 			
 		});
