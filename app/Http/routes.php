@@ -9,7 +9,13 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+ */
+ /*Versionado de la Api
+ * las rutas quedarán algo como /api/v1.0/rutas existentes....
+ */
+Route::group(array('prefix'=>'api/v1.0'),function()
+{
+
 //Programamos las nuevas rutas que tendrán en cuenta los controlesrs programados en Controllers
 //se crea un recurso con dos parametros el primero es la tabla y el segundo el controloer que lo gestiona. Se añade una excepcion con los metodos que no queremos que genere automaticamente ['except'=>['create']](ver nota en FabricanteController en metodo create)
 //Ruta /fabricantes/...
@@ -26,6 +32,14 @@ Route::get('/', function()
 {
 	return "Bienvenido API RESTfull de aviones";
 });
+});//Fin de versionado
+
+//Ruta por defecto
+Route::get('/', function()
+{
+	return "<a href='http://www.dominio.local/api/V1.0'>Por favor acceda a la versión 1.0 de la API.</a>";
+});
+
 
 /*Rutas por defecto
 Route::get('/', 'WelcomeController@index');
