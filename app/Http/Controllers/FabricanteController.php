@@ -127,21 +127,21 @@ class FabricanteController extends Controller {
 			$bandera=false;
 
 			// Actualización parcial de datos.
-			if ($nombre !=null && $nombre!='')
+			if ($nombre)
 			{
 				$fabricante->nombre=$nombre;
 				$bandera=true;
 			}
 
 			// Actualización parcial de datos.
-			if ($direccion !=null && $direccion!='')
+			if ($direccion )
 			{
 				$fabricante->direccion=$direccion;
 				$bandera=true;
 			}
 
 			// Actualización parcial de datos.
-			if ($telefono !=null && $telefono!='')
+			if ($telefono )
 			{
 				$fabricante->telefono=$telefono;
 				$bandera=true;
