@@ -7,7 +7,7 @@ class Avion extends Model {
 	protected $table="aviones";
 	//clave primaria de la tabal aviones que es serie (no id) por lo tanto hay que indicarlo
 	//Si no se indica por defecto es un campo llamado id
-	protected $primarykey='serie'; 
+	protected $primaryKey='serie'; 
 	//Atributos de la tabla que se pueden rellenar de forma masiva
 	protected $fillable=array('modelo', 'longitud', 'capacidad', 'velocidad', 'alcance');
 	//ocultamos los campos de timestamps en las consultas

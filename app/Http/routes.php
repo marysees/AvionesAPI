@@ -12,9 +12,14 @@
 */
 //Programamos las nuevas rutas que tendrán en cuenta los controlesrs programados en Controllers
 //se crea un recurso con dos parametros el primero es la tabla y el segundo el controloer que lo gestiona. Se añade una excepcion con los metodos que no queremos que genere automaticamente ['except'=>['create']](ver nota en FabricanteController en metodo create)
-Route::resource('fabricantes', 'FabricanteController', ['except'=>['create']]);
+//Ruta /fabricantes/...
+Route::resource('fabricantes', 'FabricanteController', ['except'=>['edit','create']]);
 
-Route::resource('aviones', 'AvionController');
+//Recurso anidado /fabricantes/xx/aviones. Gestiona todos los métodos menos los que aparecen en except
+Route::resource('fabricantes.aviones','FabricanteAvionController',['except'=>['show','edit','create']]);
+
+//Ruta /aviones/....El resto de métodos los gestiona FabricanteAvion
+Route::resource('aviones', 'AvionController', ['only'=>['index','show']]);
 
 //creamos la ruta por defecto
 Route::get('/', function()
