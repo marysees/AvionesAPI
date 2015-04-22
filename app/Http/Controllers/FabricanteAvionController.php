@@ -12,7 +12,14 @@ use Response;
 //Activamos el uso de las funciones de caché
 use Illuminate\Support\Facades\Caché;
 class FabricanteAvionController extends Controller {
-
+//Creamos un constructor
+	public function __construct(){
+		//esta lines hace que antes de entrar en los metodos indicados se compruebe que el usuario esté identificado
+		$this->middleware('auth.basic',['only'=>['store','update','destroy']]);
+		
+	}
+	
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -38,12 +45,7 @@ class FabricanteAvionController extends Controller {
 		//return response()->json(['status'=>'ok', 'data'=>$fabricante->aviones()->get()],200);
 		//otra forma sería
 		//	return response()->json(['status'=>'ok', 'data'=>$fabricante->aviones],200);
-		
-		
-		//Devolvemos el json usando cache
-		return response()->json(['status'=>'ok', 'data'=>$avion],200);
-		
-		
+				
 	}
 
 	/**

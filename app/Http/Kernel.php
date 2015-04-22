@@ -15,7 +15,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		//comentamos esta linea para desasctivar la proteccion del token 
+		//comentamos la siguiente linea cuando queremos desasctivar la proteccion del token 
 		//'App\Http\Middleware\VerifyCsrfToken',
 	];
 

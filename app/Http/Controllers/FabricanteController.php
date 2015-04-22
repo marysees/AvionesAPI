@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Caché;
 
 class FabricanteController extends Controller {
 
+	//Creamos un constructor
+	public function __construct(){
+		//esta lines hace que antes de entrar en los metodos indicados se compruebe que el usuario esté identificado
+		$this->middleware('auth.basic',['only'=>['store','update','destroy']]);
+		
+	}
+	
 	/**
 	 * Display a listing of the resource.
 	 *
