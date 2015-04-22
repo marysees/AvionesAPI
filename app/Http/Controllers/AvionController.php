@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Avion;
+//Activamos el uso de las funciones de caché
+use Illuminate\Support\Facades\Caché;
+
 class AvionController extends Controller {
 
 	/**
@@ -14,8 +17,19 @@ class AvionController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(['status'=>'ok', 'data'=>Avion::all()],200);
+		//return response()->json(['status'=>'ok', 'data'=>Avion::all()],200);
+		//con cache
+		
+		//Caché se actualizará con nuevos datos cada 5 minutos
+		//cachefabricantes es la clave con la que se almacenarán los
+		//registros obtenidos de Fabricante::all()
+		$avion=Cache::remenber('cacheavion',5,function(){
+			return Avion::all(); 
+		});
+		//Devolvemos el json usando cache
+		return response()->json(['status'=>'ok', 'data'=>$avion],200);
 	}
+	
 
 	/**
 	 * Show the form for creating a new resource.

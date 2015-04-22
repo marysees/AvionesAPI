@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 //Cargamos fabricante porque lo usamos mas abajo
 use App\Fabricante;
 use Response;
+//Activamos el uso de las funciones de caché
+use Illuminate\Support\Facades\Caché;
+
 
 class FabricanteController extends Controller {
 
@@ -23,10 +26,19 @@ class FabricanteController extends Controller {
 		//return Fabricante::all();
 		
 		//Para devolver un JSOn con código de respuesta HTTP
-		//para que me salga un código de respuesta usamos el metodo response que devuelve un json con dos parametros el satatus y el objeto json, por ultimo se pone el código de estado de respuesta(el 200 es una respuesta para ok, para create un 201 etc ver manual)
-		return response()->json(['status'=>'ok', 'data'=>Fabricante::all()],200);
+		//para que me salga un código de respuesta usamos el metodo response que devuelve un json con dos parametros el status y el objeto json, por ultimo se pone el código de estado de respuesta(el 200 es una respuesta para ok, para create un 201 etc ver manual)
+		//return response()->json(['status'=>'ok', 'data'=>Fabricante::all()],200);
 		
 		
+		//Para añadir la cache (con remenber se pone el nombre de la clave que se  y el tiempo 
+		//Caché se actualizará con nuevos datos cada 15 segundos
+		//cachefabricantes es la clave con la que se almacenarán los
+		//registros obtenidos de Fabricante::all()
+		$fabricante=Cache::remenber('cachefabricantes',15/60,function(){
+			return Fabricante::all(); 
+		});
+		//Devolvemos el json usando cache
+		return response()->json(['status'=>'ok', 'data'=>$fabricante],200);
 	}
 
 	/**

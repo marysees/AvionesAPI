@@ -9,6 +9,8 @@ use App\Avion;
 use App\Fabricante;
 use Response;
 
+//Activamos el uso de las funciones de caché
+use Illuminate\Support\Facades\Caché;
 class FabricanteAvionController extends Controller {
 
 	/**
@@ -24,9 +26,24 @@ class FabricanteAvionController extends Controller {
 		if(! $fabricante){
 			return response()->json(['errors'=>Array(['code'=>404,'message'=>'No se encuentra un fabricante con ese código'])],404);
 		}
-		return response()->json(['status'=>'ok', 'data'=>$fabricante->aviones()->get()],200);
+		//Caché se actualizará con nuevos datos cada 1 minuto
+		//cachefabricantes es la clave con la que se almacenarán los
+		//registros obtenidos de Fabricante::all()
+		$listaAviones=Cache::remenber('cacheaviones',1,function(){
+			return $fabricante->aviones()->get();
+		});
+		return response()->json(['status'=>'ok', 'data'=>$$listaAviones],200);
+		
+		
+		//return response()->json(['status'=>'ok', 'data'=>$fabricante->aviones()->get()],200);
 		//otra forma sería
 		//	return response()->json(['status'=>'ok', 'data'=>$fabricante->aviones],200);
+		
+		
+		//Devolvemos el json usando cache
+		return response()->json(['status'=>'ok', 'data'=>$avion],200);
+		
+		
 	}
 
 	/**
